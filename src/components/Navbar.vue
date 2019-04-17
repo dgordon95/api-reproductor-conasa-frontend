@@ -1,8 +1,11 @@
 
 <template>
-  <div>
-        <b-navbar toggleable="lg" type="dark" variant="info">
-            <b-navbar-brand href="#">NavBar</b-navbar-brand>
+  <div >
+
+        <b-navbar toggleable="lg"  type = "dark"  variant = "dark">
+            <b-navbar-brand href="#">
+                <img v-bind:src="imageSrc" class="d-inline-block align-top navbarImage" alt="Kitten">
+            </b-navbar-brand>
     
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     
@@ -22,15 +25,13 @@
                     <b-nav-item-dropdown text="Lang" right>
                         <b-dropdown-item href="#">EN</b-dropdown-item>
                         <b-dropdown-item href="#">ES</b-dropdown-item>
-                        <b-dropdown-item href="#">RU</b-dropdown-item>
-                        <b-dropdown-item href="#">FA</b-dropdown-item>
                     </b-nav-item-dropdown>
     
-                    <b-nav-item-dropdown right>
+                    <b-nav-item-dropdown right class="user">
                         <!-- Using 'button-content' slot -->
                         <template slot="button-content"><em>User</em></template>
-                        <b-dropdown-item href="#">Profile</b-dropdown-item>
-                        <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                        <b-dropdown-item href="#" to="/profile" >Profile</b-dropdown-item>
+                        <b-dropdown-item href="#" v-on:click="singout" to="/login">Sign Out</b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
@@ -42,9 +43,19 @@
 export default {
   data() {
     return {
-      message: 'Hello World',
+        imageSrc: './assets/img/icon.png'
     };
   },
+  methods: {
+      profile(){
+          window.location.href = '/#/profile'
+      },
+      singout(){
+             localStorage.removeItem("id")
+          localStorage.removeItem("apikey")
+       
+      }
+  }
 };
 </script>
 
@@ -52,6 +63,11 @@ export default {
 #app {
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
-  color: blue;
+  color: green;
 }
+.navbarImage{
+    width: 50px;
+    background: transparent;
+}
+
 </style>

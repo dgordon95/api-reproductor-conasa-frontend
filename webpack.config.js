@@ -15,5 +15,11 @@ module.exports = {
             template: './src/index.html',
         }),
         new VueLoaderPlugin(),
-    ]
+    ],
+    devServer: {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Credentials': 'true' //just in case
+        }
+    }, 
 };
