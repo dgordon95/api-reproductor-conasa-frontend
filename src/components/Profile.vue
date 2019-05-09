@@ -13,13 +13,20 @@
 
       <b-tab no-body title="Editar">
         <b-list-group>
-           <b-alert class="alertDanger" :show="showAlert" variant="danger">{{ textAlert }}</b-alert>
-  <b-alert class="alertSucces" :show="showSucces" variant="success">{{ textOk }}</b-alert>
-            <b-list-group-item>Nombre: <input type="text"></b-list-group-item>
-            <b-list-group-item>Apellido: <input type="text"></b-list-group-item>
-            <b-list-group-item>Contraseña: <input type="text"></b-list-group-item>
-             <br>
-     <b-button id="sumbit" type="submit" variant="primary">Guardar cambios</b-button>
+            <b-alert class="alertDanger" :show="showAlert" variant="danger">{{ textAlert }}</b-alert>
+            <b-alert class="alertSucces" :show="showSucces" variant="success">{{ textOk }}</b-alert>
+            <form
+              @submit.prevent="onSubmit"
+              method="put"
+            >
+            <b-list-group-item>Nombre: <input v-model="name" type="text"></b-list-group-item>
+            <b-list-group-item>Apellido: <input v-model="surname" type="text"></b-list-group-item>
+            <b-list-group-item>Contraseña: <input type="password" v-model="password" ></b-list-group-item>
+            <br>
+            <b-button id="EditSumbit" type="submit" variant="primary" :disabled="loading"><div class="lds-ring-container" v-if="loading" :disabled="loading">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>Guardar cambios</b-button>
+             </form>
         </b-list-group>
       </b-tab>
      
@@ -44,6 +51,7 @@ export default {
         surname: '',
         password:''
       },
+      password:'',
       show: true,
       name: '',
       username: '',
@@ -52,7 +60,8 @@ export default {
       showAlert: false,
       showSucces: false,
       textAlert: '',
-      textOk: ''
+      textOk: '',
+      loading: false
     }
   },
   methods: {
@@ -66,22 +75,28 @@ export default {
         console.log(err)
       })
     },
-    onSubmit() {
+    onSubmit() {this.loading = true,
       axios.put(baseUrlPut,{
           id:localStorage.getItem("id"),
-          name: this.form.name,
-          password: this.form.password,
-          surname: this.form.surname
+          name: this.name,
+          password: this.password,
+          surname: this.surname
+        },
+        {
+        headers: {
+        'Content-Type': 'application/json',
+        }
         })
         .then(response => {
+          this.loading = false
           console.log(response);
-          this.textOk = response['data']
+          this.textOk = response.data.message
           this.showSucces = true
           this.showAlert = false
-          this.delete()
         })
         .catch(error => {
-          console.log(error.response.data)
+          this.loading = false
+          console.log(error.response)
           let arrayError = error.response.data
           if(Array.isArray(arrayError)){
               let textAlert = ""
@@ -94,16 +109,15 @@ export default {
           }
 
           this.showAlert = true
+          this.showSucces = false
         });
     }
   },
   created(){
     if(checkAuth() == false)this.$router.push('Authenticationfailed')
-    this.loadProfile()
-    
+    else this.loadProfile()
   },
   mounted() {
-    
   }
 }
 </script>
@@ -112,5 +126,8 @@ export default {
 .pestañas
 {
     /*padding-left: 35%;*/
+}
+#EditSumbit{
+  width:222px;
 }
 </style>

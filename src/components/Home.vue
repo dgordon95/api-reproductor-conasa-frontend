@@ -1,7 +1,10 @@
 <template>
   <div class="container">
-    <h1 align = center>BIENVENIDO</h1>
-    <p>Por el momento solo puede acceder a su perfil. Consulte si sus datos sin los correctos</p>
+    <div id="main_div" class="">
+      <img v-bind:src="img" class=" img-responsive mobileImg img"  alt="Kitten">
+      <h1 id="main_h1">Música sin límites</h1>
+    </div>
+   
   </div>
 </template>
 
@@ -11,6 +14,7 @@ import {checkAuth} from '../services/security.js';
 export default {
   data() {
       return {
+        img: './assets/img/mobileSpoty2.png',
         form: {
         },
       }
@@ -22,5 +26,19 @@ export default {
 </script>
 
 <style>
-
+#main_div{
+  background-color: #3F3F65;
+  color: #FFFFFF;
+}
+#main_h1{
+  font-weight :70;
+  font-size: 70;
+  font-family:Verdana;
+  margin-left: 20%;
+ 
+}
+.img{
+  float: left;
+  width: 600px;
+}
 </style>

@@ -1,8 +1,6 @@
-
 <template>
   <div >
-
-        <b-navbar toggleable="lg"  type = "dark"  variant = "dark">
+        <b-navbar toggleable="lg"  type="dark" variant="dark">
             <b-navbar-brand href="#">
                 <img v-bind:src="imageSrc" class="d-inline-block align-top navbarImage" alt="Kitten">
             </b-navbar-brand>
@@ -51,9 +49,8 @@ export default {
           window.location.href = '/#/profile'
       },
       singout(){
-             localStorage.removeItem("id")
+          localStorage.removeItem("id")
           localStorage.removeItem("apikey")
-       
       }
   }
 };

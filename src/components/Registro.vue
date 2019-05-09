@@ -85,7 +85,7 @@ export default {
   data() {
       return {
         imageSrc: './assets/img/icon.png',
-           image2Src: './assets/img/devices.png',
+        image2Src: './assets/img/devices.png',
         form: {
           email: '',
           username: '',
