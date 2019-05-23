@@ -142,7 +142,7 @@ export default {
           } else {
             this.textAlert = error.response.data.error
           }
-
+          this.showSucces = false 
           this.showAlert = true
         });
       },

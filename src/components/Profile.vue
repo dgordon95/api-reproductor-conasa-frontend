@@ -47,7 +47,7 @@ export default {
     return { 
       form: {
         id:'',
-        name: '',
+        name:'',
         surname: '',
         password:''
       },
@@ -66,7 +66,8 @@ export default {
   },
   methods: {
     loadProfile() {
-      axios.get(baseUrlGet+localStorage.getItem("id")).then((response) => {
+      axios.get(baseUrlGet+localStorage.getItem("id"))
+      .then((response) => {
         this.username = response.data.username
         this.name = response.data.name
         this.surname =response.data.surname
