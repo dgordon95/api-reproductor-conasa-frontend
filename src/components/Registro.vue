@@ -170,8 +170,6 @@ export default {
 
   flex-direction: row;
   flex-wrap: wrap;
- 
-  
 
   }
 #contenedor
@@ -196,7 +194,7 @@ export default {
 #image_devices{
   width: 100%;
 }
-@media screen and (max-width:1300px) {
+@media screen and (max-width:1150px) {
 #div_image{
   display:none
 }

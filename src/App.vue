@@ -35,7 +35,7 @@ export default {
   color: black;
 }
 body{
-  background-image: url("/assets/img/back.png");
+  background-image: url("/assets/img/f2.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
