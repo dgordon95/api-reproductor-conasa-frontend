@@ -1,6 +1,5 @@
 <template>
-<div >
-      <img v-bind:src="image2Src"  class="d-inline-block hidden-xs img-responsive align-top image" alt="Kitten">
+<div id="main">
   <div id="contenedor" class="container">
     <img v-bind:src="imageSrc" class="d-inline-block align-top icon" alt="Kitten">
     
@@ -73,6 +72,9 @@
       <br><br>
       <p>¿Ya tienes cuenta?<router-link to="/login" ><button id="login" type="button" class="btn btn-link">Inicia sesion</button></router-link></p>
     </b-form>
+  </div>
+  <div id="div_image">
+      <img id="image_devices" v-bind:src="image2Src"  class="image" alt="Kitten">
   </div>
   </div>
 </template>
@@ -161,13 +163,22 @@ export default {
 </script>
 
 <style>
+#main{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+ 
+  
+
+  }
 #contenedor
 {
     border: 1px solid #D3D3D3;
     width: 300px;
     margin-top: 30px;
-    margin-left: 20%;
-    float:left;
     background-color: rgb(114, 204, 106);
 }
 .alertDanger,.alertSucces{
@@ -178,21 +189,17 @@ export default {
     padding: 12%;             
     background: transparent;
 }
-@media screen and (max-width: 900px){
-.image {
-	   display: none;
-	}
+#div_image{
+  margin-top: 300px;
+  width:800px;
 }
-.image{
-width: 900px;
-margin-top: 280px;
-    margin-left: 40%;
-   position: absolute;
+#image_devices{
+  width: 100%;
 }
-@media all and (max-width: 1000px){
-    .image{
-       visibility: hidden
-    }
+@media screen and (max-width:1300px) {
+#div_image{
+  display:none
+}
 }
 p{
   text-align: center;

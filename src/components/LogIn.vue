@@ -5,7 +5,7 @@
     <b-form v-on:submit.prevent="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
         id="input-group-1"
-        label="Direccion de correo electronico o nombre de usuario:"
+        label="Direccion de correo electronico:"
         label-for="input-1"
         >
         <b-form-input
@@ -13,7 +13,7 @@
           v-model="form.emailUsername"
           type="email"
           required
-          placeholder="Email o nombre de usuario"
+          placeholder="Email"
         ></b-form-input>
       </b-form-group>
 
@@ -39,7 +39,7 @@
       <label class="texto-checkbox" >Guarda la informacion de inicio de sesion</label>
     </b-form-checkbox>
        
-      <b-button id="sumbit" type="submit" variant="primary" :disabled="loading"> 
+      <b-button id="submit" type="submit" variant="primary" :disabled="loading"> 
         <div class="lds-ring-container" v-if="loading" :disabled="loading">
         <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
         </div>Iniciar sesion</b-button>

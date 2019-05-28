@@ -1,29 +1,48 @@
 <template>
-  <div class="container">
-    <div id="main_div" class="">
-      <img v-bind:src="img" class=" img-responsive mobileImg img"  alt="Kitten">
-      <h1 id="main_h1">Música sin límites</h1>
+    <div class="container-fluid">
+        <div id="main_div">
+          <div id="div_h1"><h1 id="h1">MUSICA SIN LIMITE</h1></div>
+          <div id="div_h2"><h1 id="h2">Escucha el ultimo disco de tu artista de Spotify favorito</h1></div>
+        </div>
+        <div>
+      <b-input-group>
+       
+        <b-form-input type="text" v-on:keyup.enter="onSubmit"  placeholder="Introduzca el nombre del artista" v-model="artist"></b-form-input>
+        <b-input-group-append>
+          <b-button id="sumbit" v-on:click='onSubmit()' type="submit" variant="primary" :disabled="loading"><div class="lds-ring-container" v-if="loading" :disabled="loading">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>Buscar</b-button>
+        </b-input-group-append>
+      </b-input-group>
     </div>
-    <div>
-  <b-input-group>
-    <h2>Busque un artista:</h2>
-    <b-form-input type="text" v-model="artist"></b-form-input>
-    <b-input-group-append>
-       <b-button id="sumbit" v-on:click='onSubmit()' type="submit" variant="primary">Buscar</b-button>
-    </b-input-group-append>
-  </b-input-group>
-</div>
-    <div>
-      <b-img id="imageArtist" v-bind:src="imageHref" fluid alt="Responsive image" v-show="imageVisible==true"></b-img>
-      <br>
-      <p v-show="imageVisible==true">Seguidores:{{followers}}</p>
-      <br>
-      <p v-show="imageVisible==true">Generos:{{genres}}</p>
-      <br>
-      <p v-show="imageVisible==true">Enlace a su cuenta de Spotify:<a v-bind:href="accountUrl">{{accountUrl}}</a></p>
-      
-    </div>
+    <div id="artist_card" v-show="imageVisible==true">
+      <b-card id="card" no-body class="overflow-hidden" style="max-width: 540px;">
+        <b-row no-gutters>
+          <b-col md="6">
+            <b-card-img v-bind:src="imageHref" class="rounded-0"></b-card-img>
+          </b-col>
+          <b-col md="6">
+            <b-card-body>
+              <b-card-text>
+                  <br>
+          <p v-show="imageVisible==true">Seguidores:{{followers}}</p>
+          
+          <p v-show="imageVisible==true">Generos:{{genres}}</p>
+          
+          <p v-show="imageVisible==true">Enlace a su cuenta de Spotify:<a v-bind:href="accountUrl">{{accountUrl}}</a></p>
+          
+          <p v-show="imageVisible==true">Ultimo disco:<b-button v-show="imageVisible==true" id="btn-reproducir" v-on:click='onSubmit2()' type="submit" variant="primary" :disabled="loading1"><div class="lds-ring-container" v-if="loading1" :disabled="loading1">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            </div>Reproducir</b-button><a v-bind:href="accountUrl"></a></p>
+              </b-card-text>
+            </b-card-body>
+          </b-col>
+        </b-row>
+      </b-card>
+        <iframe  v-show="reproVisible==true" v-bind:src="this.albumUrl" width="1111" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
   </div>
+  </div>
+  
 </template>
 
 
@@ -31,6 +50,7 @@
 import axios from 'axios';
 import {checkAuth} from '../services/security.js';
 import { baseUrlArtist } from '../config/parameters';
+import { baseUrlArtists } from '../config/parameters';
 export default {
   data() {
       return {
@@ -38,29 +58,53 @@ export default {
          artist:''
         },
         img: './assets/img/mobileSpoty2.png',
-        total:'',
+        loading: false,
+        loading1: false,
         artist:'',
+        artistId:'',
         imageHref:'',
-        visible:false,
+        imageVisible:false,
         followers:'',
         genres:'',
-        accountUrl:''
+        accountUrl:'',
+        reproVisible:false,
+        albumUrl:''
       }
     },
     methods: {
       onSubmit() {
+        this.loading = true
       axios.get(baseUrlArtist+this.artist)
       .then((response) => {
+        this.loading = false
         this.accountUrl = response.data.artists.items[0].external_urls.spotify
         this.imageHref = response.data.artists.items[0].images[0].url
         this.followers = response.data.artists.items[0].followers.total
         this.genres = response.data.artists.items[0].genres[0]
+        this.artistId = response.data.artists.items[0].id
         this.imageVisible = true
+         this.reproVisible=false
       },
        (err) => {
+         this.loading = false
         console.log(err)
       })
+      
     }, 
+    onSubmit2() {
+      this.loading1 = true,
+       axios.get(baseUrlArtists+this.artistId+'/albums')
+      .then((response) => {
+        this.loading1 = false
+        this.reproVisible=true
+        this.albumUrl = "https://open.spotify.com/embed/album/"+response.data.items[0].id
+      
+      },
+       (err) => {
+         this.loading1 = false
+        console.log(err)
+      })
+    }
   },
   created(){
     if(checkAuth() == false)this.$router.push('Authenticationfailed')
@@ -70,24 +114,70 @@ export default {
 
 <style>
 #main_div{
-  background-color: #3F3F65;
   color: #FFFFFF;
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background-image: url("/assets/img/fondo2.jpg");
+  background-attachment: fixed; 
+  background-size:100%;
+  
+
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-#main_h1{
-  font-weight :70;
-  font-size: 70;
-  font-family:Verdana;
-  margin-left: 20%;
- 
+#div_h1{
+  margin: 2%;
+  text-align: center;
 }
-.img{
-  float: left;
-  width: 600px;
+#h1{
+font-size: 70;
+color:white;
+font-family: fantasy
 }
-#imageArtist{
-  width: 30%;
-  height: 35%;
-  border: black 15px solid;
-  float:left;
+#div_h2{
+  text-align: center;
+}
+#h2{
+  font-size: 30;
+}
+
+#albums{
+  align-self: auto;
+}
+#artist_card{
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#btn-reproducir{
+  width:75%;
+}
+@media screen and (max-width:568px) {
+ #h1{
+font-size: 50;
+color:white;
+font-family: fantasy
+}
+#h2{
+  font-size: 20;
+}
+
+}
+@media screen and (max-width:414px) {
+ #h1{
+font-size: 30;
+color:white;
+font-family: fantasy
+}
+#h2{
+  font-size: 15;
+}
 }
 </style>

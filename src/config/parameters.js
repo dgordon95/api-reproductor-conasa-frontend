@@ -3,3 +3,5 @@ export const baseUrlLogin = "http://localhost/api-reproductor-practica-conasa/pu
 export const baseUrlGet = "http://localhost/api-reproductor-practica-conasa/public/api/user/"
 export const baseUrlPut = "http://localhost/api-reproductor-practica-conasa/public/api/user/changeUser"
 export const baseUrlArtist = "http://localhost/api-reproductor-practica-conasa/public/spotify/artist/"
+export const baseUrlArtists = "http://localhost/api-reproductor-practica-conasa/public/spotify/artists/"
+
