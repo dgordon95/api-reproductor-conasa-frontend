@@ -6,7 +6,7 @@
     <p>Registrate y escucha musica sin limites.</p>
     <p>------------------o------------------</p>
     <b-alert class="alertDanger" :show="showAlert" variant="danger">{{ textAlert }}</b-alert>
-  <b-alert class="alertSucces" :show="showSucces" variant="success">{{ textOk }}</b-alert>
+    <b-alert class="alertSucces" :show="showSucces" variant="success">{{ textOk }}</b-alert>
     <b-form v-on:submit.prevent="onSubmit" @reset="onReset" v-if="show">
       <b-form-group
         id="input-group-1"
@@ -76,7 +76,7 @@
   <div id="div_image">
       <img id="image_devices" v-bind:src="image2Src"  class="image" alt="Kitten">
   </div>
-  </div>
+</div>
 </template>
 
 

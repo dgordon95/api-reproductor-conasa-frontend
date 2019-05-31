@@ -1,38 +1,36 @@
 <template>
-  <div class="container">
-<b-card no-body class="pestañas">
-    <b-tabs card>
-      <b-tab no-body title="Perfil">
-        <b-list-group>
-            <b-list-group-item>Nombre de usuario: {{username}}</b-list-group-item>
-            <b-list-group-item>Nombre: {{name}}</b-list-group-item>
-            <b-list-group-item>Apellido: {{surname}}</b-list-group-item>
-            <b-list-group-item>Email: {{email}}</b-list-group-item>
-        </b-list-group>
-      </b-tab>
+  <div  class="container">
+    <b-card id="div_ficha" no-body class="pestañas">
+      <b-tabs card>
+          <b-tab no-body title="Perfil">
+            <b-list-group>
+                <b-list-group-item>Nombre de usuario: {{username}}</b-list-group-item>
+                <b-list-group-item>Nombre: {{name}}</b-list-group-item>
+                <b-list-group-item>Apellido: {{surname}}</b-list-group-item>
+                <b-list-group-item>Email: {{email}}</b-list-group-item>
+            </b-list-group>
+          </b-tab>
 
-      <b-tab no-body title="Editar">
-        <b-list-group>
-            <b-alert class="alertDanger" :show="showAlert" variant="danger">{{ textAlert }}</b-alert>
-            <b-alert class="alertSucces" :show="showSucces" variant="success">{{ textOk }}</b-alert>
-            <form
-              @submit.prevent="onSubmit"
-              method="put"
-            >
-            <b-list-group-item>Nombre: <input v-model="name" type="text"></b-list-group-item>
-            <b-list-group-item>Apellido: <input v-model="surname" type="text"></b-list-group-item>
-            <b-list-group-item>Contraseña: <input type="password" v-model="password" ></b-list-group-item>
-            <br>
-            <b-button id="EditSumbit" type="submit" variant="primary" :disabled="loading"><div class="lds-ring-container" v-if="loading" :disabled="loading">
-            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-            </div>Guardar cambios</b-button>
-             </form>
-        </b-list-group>
-      </b-tab>
-     
-      
-    </b-tabs>
-  </b-card>
+          <b-tab no-body title="Editar">
+              <b-list-group>
+                  <b-alert class="alertDanger" :show="showAlert" variant="danger">{{ textAlert }}</b-alert>
+                  <b-alert class="alertSucces" :show="showSucces" variant="success">{{ textOk }}</b-alert>
+                  <form
+                    @submit.prevent="onSubmit"
+                    method="put"
+                  >
+                  <b-list-group-item>Nombre: <input v-model="name" type="text"></b-list-group-item>
+                  <b-list-group-item>Apellido: <input v-model="surname" type="text"></b-list-group-item>
+                  <b-list-group-item>Contraseña: <input type="password" v-model="password" ></b-list-group-item>
+                  <br>
+                  <b-button id="EditSumbit" type="submit" variant="primary" :disabled="loading"><div class="lds-ring-container" v-if="loading" :disabled="loading">
+                  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                  </div>Guardar cambios</b-button>
+                  </form>
+              </b-list-group>
+          </b-tab>
+      </b-tabs>
+    </b-card>
   </div>
 </template>
 
@@ -130,5 +128,8 @@ export default {
 }
 #EditSumbit{
   width:222px;
+}
+#div_ficha{
+  margin:20px;
 }
 </style>
