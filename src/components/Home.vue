@@ -2,15 +2,17 @@
     <div class="container-fluid">
         <div id="main_div">
           <div id="div_h1"><h1 id="h1">MUSICA SIN LÍMITE</h1></div>
-          <div id="div_h2"><h1 id="h2">Escucha el ultimo disco de tu artista de Spotify favorito</h1></div>
+          <div id="div_h2"><h1 id="h2">Escucha a tu artista de Spotify favorito</h1></div>
         </div>
       <div >     
         <b-input-group>
             <form id="searchVar" @submit="onSubmit">
                 <b-input-group id="searchArtistInput"  class="mt-3">
-                <b-form-input type="text"  placeholder="Introduzca el nombre del artista" v-model="artist" required></b-form-input>
+                   
+    
+                <b-form-input type="text"  :placeholder="this.artist" v-model="artist" required></b-form-input>
                 <b-input-group-append>
-                  <b-button id="sumbit"  type="submit" variant="primary" :disabled="loading"><div class="lds-ring-container" v-if="loading" :disabled="loading">
+                  <b-button id="sumbit"  type="submit" variant="primary"  :disabled="loading"><div class="lds-ring-container" v-if="loading" :disabled="loading">
                 <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                 </div>Buscar</b-button>
                 </b-input-group-append>
@@ -21,7 +23,9 @@
     <b-alert class="alertDanger" :show="showAlert" variant="danger">{{ artisNotFoundError }}</b-alert>
     <div id="artist_card" v-show="imageVisible==true">
       <b-card id="card" no-body class="overflow-hidden" style="max-width: 540px;">
-        <b-row no-gutters>
+        <div>
+          <b-tabs content-class="mt-3" justified>
+            <b-tab title="Cuenta" active><p><b-row no-gutters>
           <b-col md="6">
             <b-card-img id="artistImg" v-bind:src="imageHref" class="rounded-0"></b-card-img>
           </b-col>
@@ -29,22 +33,23 @@
             <b-card-body>
               <b-card-text><br>
           <div id="cardItems">
+            <h3>{{artistName}}</h3>
           <p v-show="imageVisible==true">Seguidores:{{followers}}</p>
           
           <p v-show="imageVisible==true">Generos:{{genres}}</p>
           
-          <p v-show="imageVisible==true">Enlace a su cuenta de Spotify:<a v-bind:href="accountUrl">{{accountUrl}}</a></p>
-          
-          <p v-show="imageVisible==true">Ultimo disco:<b-button v-show="imageVisible==true" id="btn-reproducir" v-on:click='onSubmit2()' type="submit" variant="primary" :disabled="loading1"><div class="lds-ring-container" v-if="loading1" :disabled="loading1">
-            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-            </div>Reproducir</b-button><a v-bind:href="accountUrl"></a></p>
+          <p v-show="imageVisible==true">Enlace a su cuenta de Spotify:<a v-bind:href="accountUrl">Spotify</a></p>
           </div>
               </b-card-text>
             </b-card-body>
           </b-col>
-        </b-row>
+        </b-row></p></b-tab>
+            <b-tab title="Ultimo disco" ><iframe id="reproductor"  v-bind:src="this.albumUrl"  width="300" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></b-tab>
+            <b-tab title="Top 10 en España"><iframe id="reproductor"  v-bind:src="this.topTracksUrl"  width="300" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></b-tab>
+          </b-tabs>
+        </div>
+        
       </b-card>
-        <iframe id="reproductor" v-show="reproVisible==true" v-bind:src="this.albumUrl"   frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     </div>
   </div>
   
@@ -59,6 +64,7 @@ import { baseUrlArtists } from '../config/parameters';
 export default {
   data() {
       return {
+        
         form: {
          artist:''
         },
@@ -66,6 +72,7 @@ export default {
         loading: false,
         loading1: false,
         artist:'',
+        artistName:'',
         artistId:'',
         imageHref:'',
         imageVisible:false,
@@ -74,8 +81,11 @@ export default {
         accountUrl:'',
         reproVisible:false,
         albumUrl:'',
+        topTracksUrl:'',
         artisNotFoundError:'',
-        showAlert:false
+        showAlert:false,
+       
+        
       }
     },
     methods: {
@@ -98,6 +108,9 @@ export default {
             this.imageVisible = true
             this.reproVisible=false
             this.showAlert = false;
+            this.artistName = response.data.artists.items[0].name
+            this.lastAlbum();
+            this.topTracks();
           }
       },
        (err) => {
@@ -107,8 +120,7 @@ export default {
       })
       
     }, 
-    onSubmit2() {
-      this.loading1 = true,
+    lastAlbum() {
        axios.get(baseUrlArtists+this.artistId+'/albums')
       .then((response) => {
         this.loading1 = false
@@ -120,7 +132,20 @@ export default {
          this.loading1 = false
         console.log(err)
       })
-    }
+    },
+    topTracks() {
+       axios.get(baseUrlArtists+this.artistId+'/top-tracks')
+      .then((response) => {
+        this.loading1 = false
+        this.reproVisible=true
+        this.topTracksUrl = "https://open.spotify.com/embed/artist/"+response.data.tracks[0].album.artists[0].id
+        console.log(this.topTracksUrl);
+      },
+       (err) => {
+         this.loading1 = false
+        console.log(err)
+      })
+    },
   },
   created(){
     if(checkAuth() == false)this.$router.push('Authenticationfailed')
@@ -193,6 +218,7 @@ font-family: fantasy
   background-image: url("/assets/img/spotyback.png");
 }
 #cardItems p {
+  font-size:15;
   color: white;
 }
 #artistImg
@@ -202,11 +228,14 @@ font-family: fantasy
 #btn-reproducir{
   width:75%;
 }
+#reproductor{
+  width: 100%;
+}
+h3{
+    color:#FFFFFF;
+  }
 @media screen and (max-width:870px) {
- #reproductor{
-   width:1111;
-   height:80;
- }
+ 
   #artistImg
 {
   padding: 2%;
@@ -221,6 +250,7 @@ font-family: fantasy
  #h2{
     font-size: 20;
   }
+  
 }
 @media screen and (max-width:414px) {
  #h1{
