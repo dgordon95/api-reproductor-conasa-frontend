@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import {singout} from '../services/security.js';
 export default {
   data() {
     return {
@@ -45,8 +46,8 @@ export default {
           window.location.href = '/#/profile'
       },
       singout(){
-          localStorage.removeItem("id")
-          localStorage.removeItem("apikey")
+          console.log("hola")
+          singout()
       }
   }
 };

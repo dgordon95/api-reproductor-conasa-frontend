@@ -89,10 +89,13 @@ export default {
           this.loading = false
           this.id = response.data['id']
           this.apiKey = response.data['apiKey']
+          this.verify = response.data['verify']
           localStorage.setItem('id', this.id);
           localStorage.setItem('apikey', this.apiKey);
+          localStorage.setItem('verify', this.verify);
           this.showAlert = false
           this.$router.push('home')
+          console.log(response.data)
         })
         .catch(error => {
           this.loading = false

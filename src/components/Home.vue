@@ -148,7 +148,9 @@ export default {
     },
   },
   created(){
-    if(checkAuth() == false)this.$router.push('Authenticationfailed')
+    if(checkAuth() == false){this.$router.push('Authenticationfailed')}
+    if(localStorage.getItem("verify") == 'false'){this.$router.push('Verificacion')}
+
   },
 };
 </script>

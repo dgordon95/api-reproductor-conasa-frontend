@@ -9,6 +9,8 @@ import LogIn from './components/LogIn.vue'
 import Home from './components/Home.vue'
 import Authenticationfailed from './components/Authenticationfailed.vue'
 import Profile from './components/Profile.vue'
+import Verificacion from './components/Verificacion.vue'
+import Verificar from './components/Verificar.vue'
 
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)
@@ -20,6 +22,8 @@ const routes = [
     { path: '/home', component: Home },
     { path: '/profile', component: Profile },
     { path: '/Authenticationfailed', component: Authenticationfailed },
+    { path: '/Verificacion', component: Verificacion },
+    { path: '/Verificar', component: Verificar }
     
 
 ]

@@ -46,7 +46,6 @@ body{
   background:#F0F8FF;
   overflow:hidden;
   margin: 0 auto;
-
 }
 .lds-ring-container{
   position: absolute;

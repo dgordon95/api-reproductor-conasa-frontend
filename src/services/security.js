@@ -4,3 +4,9 @@ export function checkAuth(){
     }
     return true
 }
+
+export function singout(){
+    localStorage.removeItem("id")
+    localStorage.removeItem("apikey")
+    localStorage.removeItem("verify")
+}
