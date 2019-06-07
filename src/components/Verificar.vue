@@ -35,6 +35,7 @@ export default {
           this.loading = false
           localStorage.setItem('verify', true)
           console.log(response.data)
+          this.$router.push('home')
         })
         .catch(error => {
           this.loading = false
@@ -42,7 +43,15 @@ export default {
           let arrayError = error.response.data
         });
     }
-  }
+  },
+  created(){
+
+        localStorage.setItem('id', this.$route.query.id);
+        localStorage.setItem('apikey', this.$route.query.apiKey);
+        localStorage.setItem('verify', this.$route.query.verify);
+
+        
+    },
 };
 </script>
 
