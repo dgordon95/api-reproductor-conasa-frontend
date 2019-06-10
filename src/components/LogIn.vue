@@ -29,15 +29,9 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-checkbox
-      id="checkbox-3"
-      name="checkbox-3"
-      value="accepted"
-      unchecked-value="not_accepted"
-      
-    >
-      <label class="texto-checkbox" >Guarda la informacion de inicio de sesion</label>
-    </b-form-checkbox>
+      <div id='recuperarContraseña' class="d-flex justify-content-end">
+        <b-link  href="#/EmailPass">¿Has olvidado tu contraseña?</b-link>
+      </div>
        
       <b-button id="sumbit" type="submit" variant="primary" :disabled="loading"> 
         <div class="lds-ring-container" v-if="loading" :disabled="loading">
@@ -132,5 +126,9 @@ export default {
 }
 #sumbit{
   width:172px;
+}
+#recuperarContraseña{
+  margin: 4%;
+  font-size: 0.8em;
 }
 </style>

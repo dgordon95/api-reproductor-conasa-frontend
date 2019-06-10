@@ -8,16 +8,17 @@
 <script>
 import axios from 'axios';
 import { baseUrlPut } from '../config/parameters';
+import { baseUrlLogin} from '../config/parameters';
 export default {
   
   data() {
     return {
-     
-    };
-  },
-  components: {
+      verify:''
+    }
     
-  },
+    },
+    
+  
   methods: {
     onSubmit() {
         console.log("entra")
@@ -45,15 +46,21 @@ export default {
     }
   },
   created(){
+    
+      axios.get('http://localhost/api-reproductor-practica-conasa/public/api/user/'+this.$route.query.id)
+      .then((response) => {
+        localStorage.setItem('verify', response.data.verify);
+      }, (err) => {
+        console.log(err)
+      })
 
-        console.log(localStorage.setItem('verify', this.$route.query.verify));
 
         localStorage.setItem('id', this.$route.query.id);
         localStorage.setItem('apikey', this.$route.query.apikey);
-        localStorage.setItem('verify', this.$route.query.verify);
         
-        if(this.$route.query.verify == 0){
-          localStorage.setItem('verify', false);
+        
+        if(this.$route.query.verify = true){
+          this.$router.push('home')
         }
 
     },

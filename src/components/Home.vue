@@ -1,69 +1,64 @@
 <template>
-    <div class="container-fluid">
-        <div id="main_div">
-          <div id="div_h1"><h1 id="h1">MUSICA SIN LÍMITE</h1></div>
-          <div id="div_h2"><h1 id="h2">Escucha a tu artista de Spotify favorito</h1></div>
-        </div>
-      <div >     
-        <b-input-group>
-            <form id="searchVar" @submit="onSubmit">
-                <b-input-group id="searchArtistInput"  class="mt-3">
-                   
-    
-                <b-form-input type="text"  :placeholder="this.artist" v-model="artist" required></b-form-input>
-                <b-input-group-append>
-                  <b-button id="sumbit"  type="submit" variant="primary"  :disabled="loading"><div class="lds-ring-container" v-if="loading" :disabled="loading">
-                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                </div>Buscar</b-button>
-                </b-input-group-append>
+    <div>
+           
+      <div class="container-fluid">
+          <div id="main_div">
+            <div id="div_h1">
+              <h1 id="h1">MUSICA SIN LÍMITE</h1>
+            </div>
+            <div id="div_h2">
+              <h1 id="h2">Escucha a tu artista de Spotify favorito</h1>
+            </div>
+          </div>
+      </div>     
+      <b-input-group>
+          <form id="searchVar" @submit="onSubmit">
+              <b-input-group id="searchArtistInput"  class="mt-3">
+      
+              <b-form-input type="text"  :placeholder="this.artist" v-model="artist" required></b-form-input>
+              <b-input-group-append>
+                <b-button id="sumbit"  type="submit" variant="primary"  :disabled="loading">
+                  <div class="lds-ring-container" v-if="loading" :disabled="loading">
+                    <div class="lds-ring"></div>
+                  </div>Buscar
+                </b-button>
+              </b-input-group-append>
               </b-input-group>
-            </form>
-        </b-input-group>
-    </div>
-    <b-alert class="alertDanger" :show="showAlert" variant="danger">{{ artisNotFoundError }}</b-alert>
-    <div id="artist_card" v-show="imageVisible==true">
-      <b-card id="card" no-body class="overflow-hidden" style="max-width: 540px;">
-        <div>
-          <b-tabs content-class="mt-3" justified>
-            <b-tab title="Cuenta" active><p><b-row no-gutters>
-          <b-col md="6">
-            <b-card-img id="artistImg" v-bind:src="imageHref" class="rounded-0"></b-card-img>
-          </b-col>
-          <b-col md="6">
-            <b-card-body>
-              <b-card-text><br>
-          <div id="cardItems">
-            <h3>{{artistName}}</h3>
-          <p v-show="imageVisible==true">Seguidores:{{followers}}</p>
-          
-          <p v-show="imageVisible==true">Generos:{{genres}}</p>
-          
-          <p v-show="imageVisible==true">Enlace a su cuenta de Spotify:<a v-bind:href="accountUrl">Spotify</a></p>
-          </div>
-              </b-card-text>
-            </b-card-body>
-          </b-col>
-        </b-row></p></b-tab>
-            <b-tab title="Ultimo disco" ><iframe id="reproductor"  v-bind:src="this.albumUrl"  width="300" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></b-tab>
-            <b-tab title="Top 10 en España"><iframe id="reproductor"  v-bind:src="this.topTracksUrl"  width="300" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></b-tab>
-          </b-tabs>
-        </div>
-      </b-card>
-    </div>
-      <div>
-        <footer>
-          <div id="share">
+          </form>
+      </b-input-group>
+      <b-alert class="alertDanger" :show="showAlert" variant="danger">{{ artisNotFoundError }}</b-alert>
+      <div id="artist_card" v-show="imageVisible==true">
+        <b-card id="card" no-body class="overflow-hidden" style="max-width: 540px;">
+          <div>
+            <b-tabs content-class="mt-3" justified>
+              <b-tab title="Cuenta" active><p><b-row no-gutters>
+            <b-col md="6">
+              <b-card-img id="artistImg" v-bind:src="imageHref" class="rounded-0"></b-card-img>
+            </b-col>
+            <b-col md="6">
+              <b-card-body>
+                <b-card-text><br>
+            <div id="cardItems">
+              <h3>{{artistName}}</h3>
+            <p v-show="imageVisible==true">Seguidores:{{followers}}</p>
             
-              <a v-bind:href="twitterUrl" target='_blank'><img v-bind:src="imageSrc"   class="d-inline-block align-top navbarImage" alt="Kitten"></a>
+            <p v-show="imageVisible==true">Generos:{{genres}}</p>
             
+            <p v-show="imageVisible==true">Enlace a su cuenta de Spotify:<a v-bind:href="accountUrl">Spotify</a></p>
+            </div>
+                </b-card-text>
+              </b-card-body>
+            </b-col>
+          </b-row></p></b-tab>
+              <b-tab title="Ultimo disco" ><iframe id="reproductor"  v-bind:src="this.albumUrl"  width="300" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></b-tab>
+              <b-tab title="Top 10 en España"><iframe id="reproductor"  v-bind:src="this.topTracksUrl"  width="300" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></b-tab>
+            </b-tabs>
           </div>
-        </footer>
-        <div id="mt-8">
-        <p>© 2019 Copyright: Daniel Gordon</p>
-        </div>
-    </div> 
-     
-  </div>
+        </b-card>
+      </div>
+       <Footer/>
+      </div>
+      
   </template>
 
 
@@ -72,19 +67,16 @@ import axios from 'axios';
 import {checkAuth} from '../services/security.js';
 import { baseUrlArtist } from '../config/parameters';
 import { baseUrlArtists } from '../config/parameters';
-import Footer from '../components/Footer.vue';
+import Footer from './Footer.vue';
 
 export default {
   data() {
       return {
-        components: {
-    'Footer': Footer
-    },
-        
         form: {
          artist:''
         },
         imageSrc: './assets/img/twitterIcon.png',
+        imageSrc2: './assets/img/LinkedinIcon.png',
         loading: false,
         loading1: false,
         artist:'',
@@ -100,12 +92,16 @@ export default {
         topTracksUrl:'',
         artisNotFoundError:'',
         showAlert:false,
-        twitterUrl:''
+        twitterUrl:'',
+        linkedinUrl:'https://www.linkedin.com/in/daniel-gordon-munoz/'
        
         
       }
     },
-    
+    name: "Home",
+    components: {
+      "Footer": Footer
+    },
     methods: {
       onSubmit() {
         this.loading = true

@@ -1,5 +1,5 @@
 <template>
-  <div  class="container">
+  <div class="container">
     <b-card id="div_ficha" no-body class="pestañas">
       <b-tabs card>
           <b-tab no-body title="Perfil">

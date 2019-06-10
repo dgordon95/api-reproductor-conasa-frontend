@@ -11,6 +11,8 @@ import Authenticationfailed from './components/Authenticationfailed.vue'
 import Profile from './components/Profile.vue'
 import Verificacion from './components/Verificacion.vue'
 import Verificar from './components/Verificar.vue'
+import EmailPass from './components/EmailPass.vue'
+import NewPass from './components/NewPass.vue'
 
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)
@@ -24,6 +26,8 @@ const routes = [
     { path: '/Authenticationfailed', component: Authenticationfailed },
     { path: '/Verificacion', component: Verificacion },
     { path: '/Verificar', component: Verificar },
+    { path: '/EmailPass', component: EmailPass },
+    { path: '/NewPass', component: NewPass },
     
     
 
