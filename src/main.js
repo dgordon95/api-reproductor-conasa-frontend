@@ -23,7 +23,8 @@ const routes = [
     { path: '/profile', component: Profile },
     { path: '/Authenticationfailed', component: Authenticationfailed },
     { path: '/Verificacion', component: Verificacion },
-    { path: '/Verificar', component: Verificar }
+    { path: '/Verificar', component: Verificar },
+    
     
 
 ]

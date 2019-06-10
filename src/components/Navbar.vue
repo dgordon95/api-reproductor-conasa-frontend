@@ -1,6 +1,6 @@
 <template>
   <div >
-        <b-navbar id="navbar" toggleable="lg"  type="dark" variant="dark">
+        <b-navbar id="navbar" toggleable="lg"  type="dark" variant="succes">
             <b-navbar-brand href="/#/home">
                 <img v-bind:src="imageSrc"   class="d-inline-block align-top navbarImage" alt="Kitten">
             </b-navbar-brand>
@@ -56,6 +56,7 @@ export default {
 <style>
 #navbar{
     width: 100%;
+    background-color:rgb(58, 53, 53);
 }
 #app {
   font-size: 18px;

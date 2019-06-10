@@ -48,12 +48,23 @@
             <b-tab title="Top 10 en España"><iframe id="reproductor"  v-bind:src="this.topTracksUrl"  width="300" height="380"  frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></b-tab>
           </b-tabs>
         </div>
-        
       </b-card>
     </div>
+      <div>
+        <footer>
+          <div id="share">
+            
+              <a v-bind:href="twitterUrl" target='_blank'><img v-bind:src="imageSrc"   class="d-inline-block align-top navbarImage" alt="Kitten"></a>
+            
+          </div>
+        </footer>
+        <div id="mt-8">
+        <p>© 2019 Copyright: Daniel Gordon</p>
+        </div>
+    </div> 
+     
   </div>
-  
-</template>
+  </template>
 
 
 <script>
@@ -61,14 +72,19 @@ import axios from 'axios';
 import {checkAuth} from '../services/security.js';
 import { baseUrlArtist } from '../config/parameters';
 import { baseUrlArtists } from '../config/parameters';
+import Footer from '../components/Footer.vue';
+
 export default {
   data() {
       return {
+        components: {
+    'Footer': Footer
+    },
         
         form: {
          artist:''
         },
-        
+        imageSrc: './assets/img/twitterIcon.png',
         loading: false,
         loading1: false,
         artist:'',
@@ -84,10 +100,12 @@ export default {
         topTracksUrl:'',
         artisNotFoundError:'',
         showAlert:false,
+        twitterUrl:''
        
         
       }
     },
+    
     methods: {
       onSubmit() {
         this.loading = true
@@ -150,7 +168,16 @@ export default {
   created(){
     if(checkAuth() == false){this.$router.push('Authenticationfailed')}
     if(localStorage.getItem("verify") == 'false'){this.$router.push('Verificacion')}
-
+    
+    axios.get('http://localhost/api-reproductor-practica-conasa/public/api/share/twitter')
+      .then((response) => {
+       
+        this.twitterUrl=response.data;
+      },
+       (err) => {
+         this.loading1 = false
+        console.log(err)
+      })
   },
 };
 </script>
@@ -264,4 +291,5 @@ font-family: fantasy
   font-size: 15;
 }
 }
+
 </style>

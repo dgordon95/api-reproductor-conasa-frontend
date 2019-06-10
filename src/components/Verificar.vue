@@ -46,11 +46,16 @@ export default {
   },
   created(){
 
-        localStorage.setItem('id', this.$route.query.id);
-        localStorage.setItem('apikey', this.$route.query.apiKey);
-        localStorage.setItem('verify', this.$route.query.verify);
+        console.log(localStorage.setItem('verify', this.$route.query.verify));
 
+        localStorage.setItem('id', this.$route.query.id);
+        localStorage.setItem('apikey', this.$route.query.apikey);
+        localStorage.setItem('verify', this.$route.query.verify);
         
+        if(this.$route.query.verify == 0){
+          localStorage.setItem('verify', false);
+        }
+
     },
 };
 </script>
