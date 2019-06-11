@@ -1,6 +1,5 @@
 <template>
-    <div>
-           
+    <div>   
       <div class="container-fluid">
           <div id="main_div">
             <div id="div_h1">
@@ -265,6 +264,12 @@ h3{
 {
   padding: 2%;
 }
+  #footerId{
+  margin-top: 20px;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  }
 }
 @media screen and (max-width:568px) {
  #h1{
@@ -275,6 +280,7 @@ h3{
  #h2{
     font-size: 20;
   }
+
   
 }
 @media screen and (max-width:414px) {
@@ -286,6 +292,7 @@ font-family: fantasy
 #h2{
   font-size: 15;
 }
+
 }
 
 </style>

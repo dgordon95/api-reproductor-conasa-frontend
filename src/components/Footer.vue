@@ -16,21 +16,23 @@
 
 <script>
 import axios from 'axios';
+import { liknedinUrl} from '../config/parameters';
 import {singout} from '../services/security.js';
+import { baseUrlTwitter } from '../config/parameters';
 export default {
   data() {
     return {
         imageSrc: './assets/img/twitterIcon.png',
         imageSrc2: './assets/img/linkedinIcon.png',
         twitterUrl:'',
-        linkedinUrl:"www.linkedin.com/in/daniel-gordon-munoz",
+        linkedinUrl:liknedinUrl,
         };
         
   },
  
   name: "Footer",
   created(){
-    axios.get('http://localhost/api-reproductor-practica-conasa/public/api/share/twitter')
+    axios.get(baseUrlTwitter)
       .then((response) => {
        
         this.twitterUrl=response.data;
@@ -56,10 +58,13 @@ footer {
   text-align: center;
 
 
+
+
 }
 #mt-8{ 
    background-color:rgb(31, 34, 34);
    font-size: 14;
+  
 }
 #share{
     padding-top: 18px;
@@ -73,8 +78,10 @@ footer {
    }
 #footerId{
   margin-top: 20px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   }
+  
+
 </style>
