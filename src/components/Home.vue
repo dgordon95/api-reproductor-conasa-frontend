@@ -9,7 +9,8 @@
               <h1 id="h2">Escucha a tu artista de Spotify favorito</h1>
             </div>
           </div>
-      </div>     
+      </div>   
+      
       <b-input-group>
           <form id="searchVar" @submit="onSubmit">
               <b-input-group id="searchArtistInput"  class="mt-3">
@@ -54,6 +55,7 @@
             </b-tabs>
           </div>
         </b-card>
+         
       </div>
        <Footer/>
       </div>
@@ -181,9 +183,10 @@ export default {
 #main_div{
   color: #FFFFFF;
   width: 100%;
-  background-image: url("/assets/img/fondo2.jpg");
+  background-image: url("/assets/img/divBack.jpg");
+  background-size: contain;
   background-attachment: fixed; 
-  background-size:100%;
+ 
 
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -239,7 +242,8 @@ font-family: fantasy
   justify-content: center;
 }
 #card{
-  background-image: url("/assets/img/spotyback.png");
+  background-color:rgba(65, 65, 65, 0.904);
+
 }
 #cardItems p {
   font-size:15;
@@ -264,12 +268,7 @@ h3{
 {
   padding: 2%;
 }
-  #footerId{
-  margin-top: 20px;
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  }
+ 
 }
 @media screen and (max-width:568px) {
  #h1{
@@ -293,6 +292,9 @@ font-family: fantasy
   font-size: 15;
 }
 
+}
+#cuerpo{
+  height: 55%;
 }
 
 </style>

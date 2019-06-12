@@ -5,10 +5,11 @@
           <div id="share">
               <a v-bind:href="twitterUrl" target='_blank'><img v-bind:src="imageSrc"   class=" imgShare" alt="Kitten"></a>
               <a v-bind:href="linkedinUrl" target='_blank'><img v-bind:src="imageSrc2"   class=" imgShare" alt="Kitten"></a>
+              <a v-bind:href="facebookUrl" target='_blank'><img v-bind:src="imageSrc3"   class=" imgShare" alt="Kitten"></a>
           </div>
         </footer>
         <div id="mt-8">
-        <p>© 2019 Copyright: Daniel Gordon</p>
+        <p>&copy; 2019 Copyright: Daniel Gordon</p>
         </div>
     </div> 
   </div>
@@ -16,16 +17,19 @@
 
 <script>
 import axios from 'axios';
-import { liknedinUrl} from '../config/parameters';
 import {singout} from '../services/security.js';
+import { liknedinUrl} from '../config/parameters';
 import { baseUrlTwitter } from '../config/parameters';
+import { facebookUrl } from '../config/parameters';
 export default {
   data() {
     return {
         imageSrc: './assets/img/twitterIcon.png',
         imageSrc2: './assets/img/linkedinIcon.png',
+        imageSrc3: './assets/img/facebookIcon.jpg',   
         twitterUrl:'',
         linkedinUrl:liknedinUrl,
+        facebookUrl:facebookUrl
         };
         
   },
@@ -78,7 +82,7 @@ footer {
    }
 #footerId{
   margin-top: 20px;
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%;
   }

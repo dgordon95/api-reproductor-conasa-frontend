@@ -10,3 +10,5 @@ export const baseUrlGetByEmail = "http://localhost/api-reproductor-practica-cona
 
 
 export const liknedinUrl = "https://www.linkedin.com/in/daniel-gordon-munoz"
+export const facebookUrl = "https://www.linkedin.com/in/daniel-gordon-munoz"
+//http://www.facebook.com/sharer.php?u=url_pagina&t=titulo_contenido
