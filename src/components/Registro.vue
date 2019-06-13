@@ -57,6 +57,7 @@
         <b-form-input
           type="password"
           id="input-5"
+          minlength="9"
           v-model="form.password"
           required
           placeholder="Contraseña"
@@ -163,6 +164,9 @@ export default {
 </script>
 
 <style>
+#input-group-5{
+  
+}
 #main{
   display: -webkit-flex;
   display: -ms-flexbox;
