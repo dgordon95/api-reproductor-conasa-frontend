@@ -240,6 +240,7 @@ font-family: fantasy
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+ 
 }
 #card{
   background-color:rgba(65, 65, 65, 0.904);

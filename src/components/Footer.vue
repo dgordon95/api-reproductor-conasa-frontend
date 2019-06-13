@@ -1,17 +1,17 @@
   <template>
   <div >
-    <div id="footerId">
         <footer class="footer">
           <div id="share">
               <a v-bind:href="twitterUrl" target='_blank'><img v-bind:src="imageSrc"   class=" imgShare" alt="Kitten"></a>
               <a v-bind:href="linkedinUrl" target='_blank'><img v-bind:src="imageSrc2"   class=" imgShare" alt="Kitten"></a>
               <a v-bind:href="facebookUrl" target='_blank'><img v-bind:src="imageSrc3"   class=" imgShare" alt="Kitten"></a>
+              
           </div>
+          <div id="mt-8">
+                <p>&copy; 2019 Copyright: Daniel Gordon</p>
+              </div>
         </footer>
-        <div id="mt-8">
-        <p>&copy; 2019 Copyright: Daniel Gordon</p>
-        </div>
-    </div> 
+      
   </div>
 </template>
 
@@ -51,28 +51,23 @@ export default {
 
 <style>
 footer {
- 
-  height: 80px;
-  line-height: 60px;
   left: 0;
   bottom: 0;
   width: 100%;
+  position: fixed;
   background-color:rgb(58, 53, 53);
   color: white;
   text-align: center;
-
-
-
-
+  margin-top: 80px;
+height: 107;
 }
 #mt-8{ 
    background-color:rgb(31, 34, 34);
    font-size: 14;
-  
 }
 #share{
     padding-top: 18px;
-    padding-bottom: 18px;
+    
 }
 .imgShare{
    position: static;
@@ -80,12 +75,6 @@ footer {
 
     padding-bottom: 18px;
    }
-#footerId{
-  margin-top: 20px;
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  }
   
 
 </style>
